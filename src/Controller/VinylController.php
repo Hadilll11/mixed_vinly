@@ -7,33 +7,33 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use function Symfony\Component\String\u;
 
-class VinylController extends AbstractController
+class VinylController  extends AbstractController
 {
-    #[Route('/', name: 'app_homepage')]
+    #[Route("/", name: 'app_homepage')]
     public function homepage(): Response
     {
         $tracks = [
-            ['song' => 'Gangsta\'s Paradise', 'artist' => 'Coolio'],
-            ['song' => 'Waterfalls', 'artist' => 'TLC'],
-            ['song' => 'Creep', 'artist' => 'Radiohead'],
-            ['song' => 'Kiss from a Rose', 'artist' => 'Seal'],
-            ['song' => 'On Bended Knee', 'artist' => 'Boyz II Men'],
-            ['song' => 'Fantasy', 'artist' => 'Mariah Carey'],
+            ['id' => '1', 'song' => 'أغنية عن شهر ديسمبر ', 'artist' => 'anatasiya'],
+            ['id' => '2', 'song' => 'There\'s Nothing Holding Me Back', 'artist' => 'Shawn Mendes'],
+            ['id' => '3', 'song' => 'Tatto', 'artist' => 'Loreen'],
+            ['id' => '4', 'song' => 'Mr/Mme', 'artist' => 'Loic Nottet'],
+            ['id' => '5', 'song' => 'Wiggle', 'artist' => 'Jason Derulo '],
+            ['id' => '6', 'song' => 'Club Party Mix 2023', 'artist' => 'Mashups'],
+            ['id' => '7', 'song' => 'voila', 'artist' => 'Barbara Pravi'],
         ];
-
         return $this->render('vinyl/homepage.html.twig', [
             'title' => 'PB & Jams',
             'tracks' => $tracks,
         ]);
     }
-
     #[Route('/browse/{slug}', name: 'app_browse')]
-    public function browse(string $slug = null): Response
+
+    public function browse($slug = null): Response
     {
-        $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
+        $genre  = $slug ? 'Genre: ' . u(str_replace('-', ' ', $slug))->title(true) : null;
 
         return $this->render('vinyl/browse.html.twig', [
-            'genre' => $genre
+            'genre' => $genre,
         ]);
     }
 }
